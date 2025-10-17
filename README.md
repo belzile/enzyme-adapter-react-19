@@ -1,6 +1,6 @@
-[![npm](https://img.shields.io/npm/v/@cfaester/enzyme-adapter-react-18.svg)](https://www.npmjs.com/package/@cfaester/enzyme-adapter-react-18)
+[![npm](https://img.shields.io/npm/v/@belzile/enzyme-adapter-react-19.svg)](https://www.npmjs.com/package/@belzile/enzyme-adapter-react-19)
 
-# @cfaester/enzyme-adapter-react-18
+# @belzile/enzyme-adapter-react-19
 
 A **very** unofficial adapter for React 18 for [Enzyme](https://enzymejs.github.io/enzyme/).
 
@@ -9,7 +9,7 @@ Should you count on it? Probably not. Can you use it as a reference for your own
 ## Installation
 
 ```
-npm install --save-dev @cfaester/enzyme-adapter-react-18
+npm install --save-dev @belzile/enzyme-adapter-react-19
 ```
 
 ## Configuration
@@ -18,7 +18,7 @@ You need to add it to Enzyme configuration. This is actually pretty easy. Just i
 
 ```js
 import Enzyme from 'enzyme';
-import Adapter from '@cfaester/enzyme-adapter-react-18';
+import Adapter from '@belzile/enzyme-adapter-react-19';
 
 Enzyme.configure({ adapter: new Adapter() });
 ```

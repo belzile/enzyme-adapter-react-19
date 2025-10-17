@@ -1,6 +1,6 @@
 {
-  "name": "@cfaester/enzyme-adapter-react-18",
-  "version": "0.8.0",
+  "name": "@belzile/enzyme-adapter-react-19",
+  "version": "19.0.0",
   "description": "An unofficial React 18 adapter for Enzyme, that you probably shouldn't use.",
   "repository": {
     "type": "git",
@@ -31,28 +31,28 @@
     "enzyme-shallow-equal": "^1.0.0",
     "react-is": "^18.2.0",
     "has": "^1.0.4",
-    "react-shallow-renderer": "^16.15.0",
+    "@belzile/react-shallow-renderer": "^19",
     "function.prototype.name": "^1.1.6"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.13",
     "@types/node": "^17.0.23",
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0",
-    "@types/react-is": "^18.3.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-is": "^19",
     "enzyme": "^3.11.0",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.3.1",
+    "react": "^19",
+    "react-dom": "^19",
     "typescript": "^5.4.5"
   },
   "overrides": {
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0"
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
   },
   "peerDependencies": {
     "enzyme": "^3.11.0",
-    "react": ">=18",
-    "react-dom": ">=18"
+    "react": ">=19",
+    "react-dom": ">=19"
   }
 }

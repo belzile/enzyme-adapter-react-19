@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 
-import ShallowRenderer from "react-shallow-renderer";
-import TestUtils from 'react-dom/test-utils';
+import ShallowRenderer from "@belzile/react-shallow-renderer";
+import { Simulate } from './Simulate';
 import has from 'has';
 import {
 	ContextConsumer,
@@ -54,6 +54,8 @@ import {
 } from './enzyme-adapter-utils';
 import findCurrentFiberUsingSlowPath from './findCurrentFiberUsingSlowPath';
 import detectFiberTags from './detectFiberTags';
+
+
 
 const FIBER_TAGS = detectFiberTags();
 
@@ -113,10 +115,10 @@ function checkIsSuspenseAndCloneElement(el, { suspenseFallback }) {
 		return el;
 	}
 
-	let { children } = el.props;
+	let { children } = el.props as any;
 
 	if (suspenseFallback) {
-		const { fallback } = el.props;
+		const { fallback } = el.props as any;
 		children = replaceLazyWithFallback(children, fallback);
 	}
 
@@ -308,11 +310,11 @@ function nodeToHostNode(_node) {
 		return null;
 	}
 
-	
+
 
 	const mapper = (item) => {
-		
-		if (item && item.instance) return ReactDOM.findDOMNode(item.instance);
+
+		// if (item && item.instance) return ReactDOM.findDOMNode(item.instance);
 
 		return null;
 	};
@@ -363,7 +365,7 @@ function getEmptyStateValue() {
 }
 
 // @ts-ignore
-const wrapAct = React.unstable_act || TestUtils.act;
+const wrapAct = React.act;
 
 function getProviderDefaultValue(Provider) {
 	// React stores references to the Provider's defaultValue differently across versions.
@@ -387,7 +389,7 @@ function isStateful(Component) {
 	);
 }
 
-class ReactEighteenAdapter extends EnzymeAdapter {
+class ReactNineteenAdapter extends EnzymeAdapter {
 	constructor() {
 		super();
 		// @ts-expect-error
@@ -420,7 +422,7 @@ class ReactEighteenAdapter extends EnzymeAdapter {
 
 	createMountRenderer(options) {
 		globalThis.IS_REACT_ACT_ENVIRONMENT = true;
-		
+
 		assertDomAvailable('mount');
 		if (has(options, 'suspenseFallback')) {
 			throw new TypeError('`suspenseFallback` is not supported by the `mount` renderer');
@@ -432,7 +434,7 @@ class ReactEighteenAdapter extends EnzymeAdapter {
 		let rootNode = null;
 		const adapter = this;
 		let unmountFlag = false;
-		
+
 		return {
 			render(el, context, callback) {
 				return wrapAct(() => {
@@ -448,7 +450,7 @@ class ReactEighteenAdapter extends EnzymeAdapter {
 						};
 						const ReactWrapperComponent = createMountWrapper(el, { ...options, adapter });
 						const wrappedEl = React.createElement(ReactWrapperComponent, wrapperProps);
-						
+
 						if (hydrateIn) {
 							rootNode = hydrateRoot(domNode, wrappedEl);
 						} else {
@@ -516,10 +518,10 @@ class ReactEighteenAdapter extends EnzymeAdapter {
 					});
 			},
 			async simulateEvent(node, event, mock) {
-				
+
 				const hostNode = adapter.nodeToHostNode(node);
 				const mappedEvent = mapNativeEventNames(event);
-				const eventFn = TestUtils.Simulate[mappedEvent];
+				const eventFn = Simulate[mappedEvent];
 				// console.log('Simulate on', hostNode, mock);
 				if (!eventFn) {
 					throw new TypeError(`ReactWrapper::simulate() event '${event}' does not exist`);
@@ -637,7 +639,7 @@ class ReactEighteenAdapter extends EnzymeAdapter {
 				if (typeof el.type === 'string') {
 					isDOM = true;
 				} else if (isContextProvider(el)) {
-					providerValues.set(el.type, el.props.value);
+					providerValues.set(el.type, (el.props as any).value);
 					const MockProvider = Object.assign((props) => props.children, el.type);
 
 					return withSetStateAllowed(() => renderElement({ ...el, type: MockProvider }));
@@ -995,4 +997,4 @@ Add the following to your test suite setup file ("setupfile" option in Jest), to
 	}
 }
 
-export default ReactEighteenAdapter;
+export default ReactNineteenAdapter;

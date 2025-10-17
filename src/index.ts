@@ -1,3 +1,3 @@
-import ReactEighteenAdapter from './ReactEighteenAdapter';
+import ReactNineteenAdapter from './ReactNineteenAdapter';
 
-export default ReactEighteenAdapter;
+export default ReactNineteenAdapter;
